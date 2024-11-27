@@ -3,7 +3,7 @@ const Entity = require('./Entity');
 class Question extends Entity {
     #status = 'pending';
 
-    constructor(id, text, status) {
+    constructor(id, text, status = 'pending') {
         super(id);
         this._text = text;
         this._answers = [];
@@ -15,7 +15,7 @@ class Question extends Entity {
     }
 
     get status() {
-        return this._status;
+        return this.#status;
     }
 
     get answers() {
@@ -25,7 +25,7 @@ class Question extends Entity {
     addAnswer(answer) {
         this._answers.push(answer);
         if (this._answers.length > 0) {
-            this._status = 'answered';
+            this.#status = 'answered';
         }
     }
 
@@ -34,7 +34,7 @@ class Question extends Entity {
     }
 
     toString() {
-        return `Question ID: ${this._id}, Text: ${this._text}, Status: ${this._status}`;
+        return `Question ID: ${this._id}, Text: ${this._text}, Status: ${this.#status}`;
     }
 }
 
